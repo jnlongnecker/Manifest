@@ -108,8 +108,8 @@
         <name>Group</name>
     </types>
     <types>
-        <!-- Retrieves the Object_Layout page layout for the Object object. DO NOT RETRIEVE ALL, replace this with your own page layouts -->
-        <members>Object-Object_Layout</members>
+        <!-- Retrieves the Object Layout page layout for the Object object. DO NOT RETRIEVE ALL, replace this with your own page layouts -->
+        <members>Object-Object Layout</members>
         <name>Layout</name>
     </types>
     <types>
