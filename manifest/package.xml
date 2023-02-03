@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    The XML file structure is rather fragile and must be very precisely maintained.
+    No extra whitespace is allowed to space apart tags.
+
+    In your trailhead playground, there are a number of metadata types that already have configurations that will be pulled.
+    You want to make sure you don't pull these extra, useless configurations you did not make as it will bloat your
+    project and cause all manner of problems. Unless the metadata type already uses the * operator, DO NOT USE IT.
+    This is especially the case on metadata types that specifically say not to retrieve all.
+
+    DO NOT get lazy and use "automatic manifest generator" extensions/programs. This WILL screw up your file and make it 10x
+    harder and I will feel no sympathy because I told you not to. Instead, whenever you create a feature that does not automatically
+    pull all files of that metadata type, update this file with the new entry.
+
+    In order to look through the total list of all metadata types, here is the documentation link:
+    https://developer.salesforce.com/docs/atlas.en-us.api_meta.meta/api_meta/meta_types_list.htm
+
+    If your feature is not getting pulled, look at the above list and see if this manifest file includes it. If not, add it as
+    a new entry in its own <types></types> element. Make sure not to leave any <types></types> elements empty. Warnings that
+    may display in the console do not prevent metadata from being pulled/deployed.
+
+    To deploy using your manifest:
+    sfdx force:source:deploy -x ./path/to/package.xml
+
+    To retrieve using your manifest:
+    sfdx force:source:retrieve -x ./path/to/package.xml
+
+    Remember: This file will ONLY retrieve metadata, it will NOT retrieve any records that are in your org.
+-->
+<Package xmlns="http://soap.sforce.com/2006/04/metadata">
+    <types>
+        <!-- Retrieves all approval processes -->
+        <members>*</members>
+        <name>ApprovalProcess</name>
+    </types>
+    <types>
+        <!-- Retrieves the lead and case assignment rules named MyRule. Replace these with your custom rule names -->    
+        <members>Case.MyRule</members>
+        <members>Lead.MyRule</members>
+        <name>AssignmentRule</name>
+    </types>
+    <types>
+        <!-- Retrieves the lead and case auto-response rules named MyRule. Replace these with your custom rule names -->    
+        <members>Case.MyRule</members>
+        <members>Lead.MyRule</members>
+        <name>AutoResponseRule</name> 
+    </types>
+    <types>
+        <!-- Retrieves the custom app named CustomAppName. DO NOT RETRIEVE ALL, only list your custom apps you create -->
+        <members>CustomAppName</members>
+        <name>CustomApplication</name>
+    </types>
+    <types>
+        <!-- Retrieves custom fields on Account and Contact only. If you customize other standard objects, add them here -->
+        <members>Account</members>
+        <members>Contact</members>
+        <name>CustomObject</name>
+    </types>
+    <types>
+        <!-- Retrieves all custom objects and their custom fields -->
+        <members>*</members>
+        <name>CustomObject</name>
+    </types>
+    <types>
+        <!-- Retrieves all custom tabs -->
+        <members>*</members>
+        <name>CustomTab</name>
+    </types>
+    <types>
+        <!-- Ask for assistance for retrieving Email Templates -->
+        <!--
+        <members>unfiled$public/EmailTemplateName</members>
+        <name>EmailTemplate</name>
+    </types>
+    <types>
+        -->
+        <!-- Retrieves the case escalation rule named MyRule. Add your custom rules as members and delete this one -->
+        <members>Case.MyRule</members>
+        <name>EscalationRule</name>
+    </types>
+    <types>
+        <!-- Retrieves the lightning page named MyLightningPage. DO NOT RETRIEVE ALL, replace with only your own lightning pages -->
+        <members>MyLightningPage</members>
+        <name>FlexiPage</name>
+    </types>
+    <types>
+        <!-- Retrieves all flows -->
+        <members>*</members>
+        <name>Flow</name>
+    </types>
+    <types>
+        <!-- Retrieves all public groups -->
+        <members>*</members>
+        <name>Group</name>
+    </types>
+    <types>
+        <!-- Retrieves the Object_Layout page layout for the Object object. DO NOT RETRIEVE ALL, replace this with your own page layouts -->
+        <members>Object-Object_Layout</members>
+        <name>Layout</name>
+    </types>
+    <types>
+        <!-- Retrieves all custom themes for the lightning experience -->
+        <members>*</members>
+        <name>LightningExperienceTheme</name>
+    </types>
+    <types>
+        <!-- Retrieves all permission sets. Make sure to pull any objects you want to have the permissions for -->
+        <members>*</members>
+        <name>PermissionSet</name>
+    </types>
+    <types>
+        <!-- Retrieves all permission set groups defined. Make sure to pull the permission sets in them -->
+        <members>*</members>
+        <name>PermissionSetGroup</name>
+    </types>
+    <types>
+        <!-- 
+            Retrieves the CustomProfile profile. DO NOT RETRIEVE ALL, replace with your custom profiles.
+            Make sure to pull any objects you want to have the permissions for 
+        -->
+        <members>CustomProfile</members>
+        <name>Profile</name>
+    </types>
+    <types>
+        <!-- Retrieves all password policies on all profiles. Make sure to also pull the profile -->
+        <members>*</members>
+        <name>ProfilePasswordPolicy</name>
+    </types>
+    <types>
+        <!-- Retrieves all queues. Make sure to pull any roles/public groups that make up the queue -->
+        <members>*</members>
+        <name>Queue</name>
+    </types>
+    <types>
+        <!-- Retrieves the quick action named MyQuickAction. DO NOT RETRIEVE ALL, replace with your custom quick actions -->
+        <members>MyQuickAction</members>
+        <name>QuickAction</name>
+    </types>
+    <types>
+        <!-- Retrieves all logic declarations for displaying recommendations for Einstein NBA -->
+        <members>*</members>
+        <name>RecommendationStrategy</name>
+    </types>
+    <types>
+        <!-- Retrieves the CustomReportType report type. DO NOT RETRIEVE ALL, replace with your custom report types -->
+        <members>CustomReportType</members>
+        <name>ReportType</name>
+    </types>
+    <types>
+        <!-- Ask for assistance for retrieving custom reports -->
+        <!--
+        <members>MyReportFolder/MyReportName</members>
+        <name>Report</name>
+    </types>
+    <types>
+        -->
+        <!-- 
+            Retrieves all sharing rules for an object named CustomObj. 
+            DO NOT RETRIEVE ALL, only list the objects you made sharing rules for 
+        -->
+        <members>CustomObj__c.*</members>
+        <name>SharingRules</name>
+    </types>
+    <types>
+        <!-- Retrieves all miscellaneous configurations. Do not retrieve all -->
+        <members>Security</members>
+        <name>Settings</name>
+    </types>
+    <version>56.0</version>
+</Package>
