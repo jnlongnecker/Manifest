@@ -16,8 +16,8 @@
     https://developer.salesforce.com/docs/atlas.en-us.api_meta.meta/api_meta/meta_types_list.htm
 
     If your feature is not getting pulled, look at the above list and see if this manifest file includes it. If not, add it as
-    a new entry in its own <types></types> element. Make sure not to leave any <types></types> elements empty. Warnings that
-    may display in the console do not prevent metadata from being pulled/deployed.
+    a new entry in its own <types></types> element. Make sure not to leave any <types></types> elements empty. Having members that don't exist
+    will not affect PULLING data, but it WILL affect deploying data, so make sure you get rid of the temporary members.
 
     To deploy using your manifest:
     sfdx force:source:deploy -x ./path/to/package.xml
@@ -26,6 +26,11 @@
     sfdx force:source:retrieve -x ./path/to/package.xml
 
     Remember: This file will ONLY retrieve metadata, it will NOT retrieve any records that are in your org.
+
+    ================================================================ IMPORTANT ================================================================
+    This manifest and most manifests are NOT going to be perfect. There will almost always be at least a small amount of tweaking once the data
+    is moved from one org to another. This manifest will NOT have absolutely everything you need; you MUST customize it. It would be impossible
+    to give you a perfectly defined, complete manifest.
 -->
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
     <types>
@@ -51,14 +56,23 @@
         <name>CustomApplication</name>
     </types>
     <types>
-        <!-- Retrieves custom fields on Account and Contact only. If you customize other standard objects, add them here -->
-        <members>Account</members>
-        <members>Contact</members>
+        <!-- 
+            Retrieves all custom objects and their custom fields.
+            NOTE: The CustomObject metadata type will also include the following:
+            - Record Types
+            - List Views
+            - OWDs
+            - Validation Rules
+            - Compact Layouts
+            - Much more
+        -->
+        <members>*</members>
         <name>CustomObject</name>
     </types>
     <types>
-        <!-- Retrieves all custom objects and their custom fields -->
-        <members>*</members>
+        <!-- Retrieves custom fields and other info on Account and Contact only. If you customize other standard objects, add them here -->
+        <members>Account</members>
+        <members>Contact</members>
         <name>CustomObject</name>
     </types>
     <types>
@@ -152,8 +166,13 @@
         <members>MyReportFolder/MyReportName</members>
         <name>Report</name>
     </types>
-    <types>
+    <types> 
         -->
+        <!-- Retrieves the CEO role. Add your roles that you want to retrieve as new members  -->
+        <members>CEO</members>
+        <name>Role</name>
+    </types>
+    <types>
         <!-- 
             Retrieves all sharing rules for an object named CustomObj. 
             DO NOT RETRIEVE ALL, only list the objects you made sharing rules for 
@@ -162,9 +181,19 @@
         <name>SharingRules</name>
     </types>
     <types>
-        <!-- Retrieves all miscellaneous configurations. Do not retrieve all -->
+        <!-- 
+            There are many possible members for Settings. View the documentation for the one(s) you should include. DO NOT RETRIEVE ALL.
+            The one included will pull generic org security settings. 
+        -->
         <members>Security</members>
         <name>Settings</name>
+        <!--
+            Some other members you might look at including:
+            <members>CurrencySettings</members> - Used for multiple currencies and other currency configurations
+            <members>CaseSettings</members> - Used for settings in the support settings tab
+            <members>CompanySettings</members> - Used for fiscal year configuration
+            <members>KnowledgeSettings</members> - Used for configurations for Salesforce Knowledge
+        -->
     </types>
     <version>56.0</version>
 </Package>
