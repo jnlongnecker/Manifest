@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
+    =========== Empty Manifest Template ===========
+    
+    <?xml version="1.0" encoding="UTF-8"?>
+    <Package xmlns="http://soap.sforce.com/2006/04/metadata">
+        <version>56.0</version>
+    </Package>
+
+    ==================================================================================================
     The XML file structure is rather fragile and must be very precisely maintained.
     No extra whitespace is allowed to space apart tags.
 
